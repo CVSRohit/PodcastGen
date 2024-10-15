@@ -2,7 +2,6 @@ import streamlit as st
 from utils import process_pdf, extract_text_from_url
 from summarizer import summarize_text
 from tts import generate_audio
-import os
 
 def main():
     # Initialize session state variables if they don't exist
