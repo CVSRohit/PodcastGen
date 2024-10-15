@@ -1,0 +1,10 @@
+[build-system]
+requires = ["setuptools>=65.5.0", "wheel>=0.38.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "your-project-name"
+version = "0.1.0"
+description = "Your project description"
+requires-python = ">=3.12"
+
