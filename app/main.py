@@ -110,6 +110,12 @@ def main():
                 st.error("No audio generated or invalid audio data. Please check the logs for more details.")
     else:
         st.write("No text available for summarization.")
+
+    # Add the Publish to Apple Podcast link at the bottom
+    st.markdown(
+        "[![Publish to Apple Podcast](https://upload.wikimedia.org/wikipedia/commons/6/6e/Apple_Podcasts_logo.svg)](https://podcasters.apple.com/){:target='_blank'}"
+    )
+    
     st.write("Created by [Rohit Challa](https://www.linkedin.com/in/rohitchalla/). Open source on [GitHub](https://github.com/CVSRohit/PodcastGen)")
 
 if __name__ == "__main__":
