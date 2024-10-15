@@ -34,7 +34,8 @@ def generate_audio(dialogue):
 
             # Check if the response is in the expected format
             if hasattr(response, 'content') and isinstance(response.content, bytes):
-                audio_file_path = os.path.join(st.runtime.get_instance().temp_dir, f"{role.lower()}_output_{index}.mp3")
+                # Use tempfile.gettempdir() to get the temporary directory
+                audio_file_path = os.path.join(tempfile.gettempdir(), f"{role.lower()}_output_{index}.mp3")
                 with open(audio_file_path, 'wb') as f:
                     f.write(response.content)
 
@@ -52,7 +53,7 @@ def generate_audio(dialogue):
         for audio_file in audio_file_paths:
             stitched_audio += AudioSegment.from_file(audio_file)
 
-        stitched_audio_path = os.path.join(st.runtime.get_instance().temp_dir, "stitched_output.mp3")
+        stitched_audio_path = os.path.join(tempfile.gettempdir(), "stitched_output.mp3")
         stitched_audio.export(stitched_audio_path, format="mp3")
 
         return stitched_audio_path
