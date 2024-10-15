@@ -8,7 +8,7 @@ import streamlit as st  # Add this import to use Streamlit for input
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-def summarize_text(text, audience, host_name=None, guest_name=None):
+def summarize_text(text, audience, host_name, guest_name):
     """
     Summarizes the given text using OpenAI's GPT model and formats it as a structured podcast dialogue.
 
