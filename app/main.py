@@ -111,9 +111,10 @@ def main():
     else:
         st.write("No text available for summarization.")
 
-    # Add the Publish to Apple Podcast link at the bottom
+    # Add the Publish to Apple Podcast link at the bottom with limited logo size
     st.markdown(
-        "[![Publish to Apple Podcast](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Podcasts_%28iOS%29.svg/600px-Podcasts_%28iOS%29.svg.png)](https://podcasters.apple.com/){:target='_blank'}"
+        "<a href='https://podcasters.apple.com/' target='_blank'><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Podcasts_%28iOS%29.svg/50px-Podcasts_%28iOS%29.svg.png' style='width: 50px;'/></a>",
+        unsafe_allow_html=True
     )
     
     st.write("Created by [Rohit Challa](https://www.linkedin.com/in/rohitchalla/). Open source on [GitHub](https://github.com/CVSRohit/PodcastGen)")
