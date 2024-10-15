@@ -92,8 +92,7 @@ def main():
                     st.session_state.podcast_dialogue["dialogue"] = new_dialogue
                     st.session_state.show_edit = False
                     st.success("Changes saved!")
-                    # Update the displayed dialogue after saving changes
-                    st.session_state.updated_dialogue = new_dialogue  # Store updated dialogue in session state
+                    st.session_state.updated_dialogue = new_dialogue  
 
         # Generate audio from podcast dialogue only if it exists
         if 'podcast_dialogue' in st.session_state and st.button("Generate Podcast"):
@@ -102,13 +101,14 @@ def main():
                 # Use st.audio to play the audio bytes directly
                 st.audio(audio_file, format='audio/mp3')
                 st.success("Audio generated successfully!")  # Notify user of success
-                st.write(f"Audio file generated at: {audio_file}")  # Display the audio file path
+                st.write("Please note that this audio is AI-generated.")
             elif isinstance(audio_file, dict) and "error" in audio_file:  # Check for error in audio generation
                 st.error(audio_file["error"])  # Display error message
             else:
                 st.error("No audio generated or invalid audio data. Please check the logs for more details.")
     else:
         st.write("No text available for summarization.")
+    st.write("Created by Rohit Challa. [Open source on GitHub](https://github.com/CVSRohit/PodcastGen)")
 
 if __name__ == "__main__":
     main()
