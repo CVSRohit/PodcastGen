@@ -1,8 +1,0 @@
-aiofiles
-aiohttp
-aioresponses
-# ... other dependencies ...
-gradio>=4.44.1
-urllib3>=2.0,<3.dev0
-# Remove or update any conflicting packages
-# inference-sdk==0.10.0  # Comment this out or update to a compatible version
