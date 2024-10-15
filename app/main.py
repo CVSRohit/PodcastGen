@@ -3,6 +3,8 @@ from utils import process_pdf, extract_text_from_url
 from summarizer import summarize_text
 from tts import generate_audio
 
+st.set_page_config(page_title="SummarizeToday", page_icon="🎤")  # Changed to microphone icon
+
 def main():
     # Initialize session state variables if they don't exist
     if 'show_edit' not in st.session_state:
