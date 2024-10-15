@@ -1,5 +1,5 @@
 streamlit>=1.20.0,<2.0.0          # Streamlit for building the web app
-openai>=0.27.0,<1.0.0             # OpenAI API client for accessing GPT models
+openai>=1.0.0,<2.0.0             # OpenAI API client for accessing GPT models
 PyPDF2>=2.0.0,<3.0.0             # Library for reading PDF files
 pydub>=0.25.1,<0.26.0              # Library for audio manipulation (optional, if needed)
 numpy>=1.23.5,<2.0.0              # Numerical operations (optional, if needed)
