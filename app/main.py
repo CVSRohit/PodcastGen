@@ -10,7 +10,7 @@ def main():
         st.session_state.show_edit = False  # Initialize show_edit to False
 
     # Display the title with the image next to it
-    st.image("podcast.png", width=50)  # Adjust width as needed
+    st.image("app/podcast.png", width=50)  # Adjust width as needed
     st.title("SummarizeToday: PDF/Link to Podcast")  # Replace with your actual title
     
     # Create two columns for file upload and URL input
