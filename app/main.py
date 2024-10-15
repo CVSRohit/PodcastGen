@@ -28,6 +28,17 @@ def main():
     # Add input for audience definition
     audience = st.text_input("Define the audience for the podcast (e.g, CEO of an AI company):")
 
+    # Create a new row for host and guest names
+    col3, col4 = st.columns(2)  # Create two new columns for host and guest names
+
+    with col3:
+        # Add input for host name
+        host_name = st.text_input("Enter the host's name:", value="John")
+
+    with col4:
+        # Add input for guest name
+        guest_name = st.text_input("Enter the guest's name:", value="Ash")
+
     if uploaded_file is not None:
         # Process the PDF
         text = process_pdf(uploaded_file)
@@ -40,8 +51,8 @@ def main():
 
         # Generate the "Generate Dialogues" button only if text is available
         if st.button("Generate Dialogues"):
-            # Summarize the text into podcast dialogue, passing the audience
-            podcast_dialogue = summarize_text(text, audience)  # Pass audience here
+            # Summarize the text into podcast dialogue, passing the audience, host, and guest names
+            podcast_dialogue = summarize_text(text, audience, host_name, guest_name)  # Pass host and guest names here
             if "error" not in podcast_dialogue:  # Check for errors in summarization
                 st.session_state.podcast_dialogue = podcast_dialogue  # Store the dialogue in session state
                 st.success("Dialogues generated successfully!")  # Notify user of success

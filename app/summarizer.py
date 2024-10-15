@@ -2,25 +2,32 @@ import openai
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
+import streamlit as st  # Add this import to use Streamlit for input
 
 # Load environment variables from .env file
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-def summarize_text(text, audience):
+def summarize_text(text, audience, host_name=None, guest_name=None):
     """
     Summarizes the given text using OpenAI's GPT model and formats it as a structured podcast dialogue.
 
     Args:
         text (str): The text to summarize.
         audience (str): The audience definition for the podcast.
+        host_name (str): The name of the host.
+        guest_name (str): The name of the guest.
 
     Returns:
         dict: A structured representation of the podcast dialogue.
     """
+    # Set default values if host_name or guest_name are not provided
+    host_name = host_name or "John"
+    guest_name = guest_name or "Ash"
+
     try:
         messages = [
-            {"role": "user", "content": f"Please summarize in maximum 750 words the following text into a structured podcast dialogue between a Host and a Guest. The audience for this podcast is {audience}. Name of the podcast is SummarizeToday:\n\n{text}"}
+            {"role": "user", "content": f"Please summarize in maximum 750 words the following text into a structured podcast dialogue between {host_name} and {guest_name}. The audience for this podcast is {audience}. Name of the podcast is SummarizeToday:\n\n{text}"}
         ]
         response = client.chat.completions.create(
             model="gpt-4o-mini",
