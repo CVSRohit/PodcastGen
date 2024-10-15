@@ -2,6 +2,7 @@ import streamlit as st
 from utils import process_pdf, extract_text_from_url
 from summarizer import summarize_text
 from tts import generate_audio
+import os
 
 st.set_page_config(page_title="SummarizeToday", page_icon="app/podcast.png")  # Changed to use podcast image
 
@@ -9,6 +10,11 @@ def main():
     # Initialize session state variables if they don't exist
     if 'show_edit' not in st.session_state:
         st.session_state.show_edit = False  # Initialize show_edit to False
+
+    # Input for OpenAI API key
+    api_key = st.text_input("Enter your own OpenAI API Key:", type="password")
+    if api_key:
+        st.session_state.api_key = api_key  # Store the API key in Streamlit's session state
 
     # Display the title with the image next to it
     st.image("app/podcast.png", width=50)  # Adjust width as needed
