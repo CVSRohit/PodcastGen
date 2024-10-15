@@ -87,9 +87,13 @@ def main():
         # Generate audio from podcast dialogue only if it exists
         if 'podcast_dialogue' in st.session_state and st.button("Generate Podcast"):
             audio_file = generate_audio(st.session_state.podcast_dialogue)
-            if audio_file:
+            if audio_file and isinstance(audio_file, str):  # Check if audio_file is a valid string
                 # Use st.audio to play the audio bytes directly
                 st.audio(audio_file, format='audio/mp3')
+                st.success("Audio generated successfully!")  # Notify user of success
+                st.write(f"Audio file generated at: {audio_file}")  # Display the audio file path
+            elif isinstance(audio_file, dict) and "error" in audio_file:  # Check for error in audio generation
+                st.error(audio_file["error"])  # Display error message
             else:
                 st.error("No audio generated or invalid audio data. Please check the logs for more details.")
     else:

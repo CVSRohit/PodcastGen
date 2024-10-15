@@ -58,4 +58,4 @@ def generate_audio(dialogue):
         return stitched_audio_path
     except Exception as e:
         print(f"Error generating audio: {e}")
-        return None
+        return {"error": str(e)}  # Return error message as a dictionary
