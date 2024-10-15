@@ -119,7 +119,7 @@ def main():
 
     # Add the Publish to Apple Podcast link at the bottom with limited logo size
     st.markdown(
-        "<a href='https://podcasters.apple.com/' target='_blank'><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Podcasts_%28iOS%29.svg/50px-Podcasts_%28iOS%29.svg.png' style='width: 40px;'/>Publish to Apple Podcast</a>",
+        "<a href='https://podcasters.apple.com/' target='_blank'><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Podcasts_%28iOS%29.svg/50px-Podcasts_%28iOS%29.svg.png' style='width: 40px;'/>  Publish to Apple Podcast</a>",
         unsafe_allow_html=True
     )
     
