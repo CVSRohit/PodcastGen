@@ -87,16 +87,12 @@ def main():
 
         # Generate audio from podcast dialogue only if it exists
         if 'podcast_dialogue' in st.session_state and st.button("Generate Podcast"):
-            audio_files = generate_audio(st.session_state.podcast_dialogue)  # Get list of audio files
-            print("Generated audio files:", audio_files)  # Debugging line
-            if audio_files and isinstance(audio_files, str):  # Check if audio_files is a string
-                audio_file_path = audio_files  # Use the returned path directly
-                if os.path.isfile(audio_file_path):  # Check if it's a file
-                    st.audio(audio_file_path, format='audio/mp3')  # Use 'audio/mp3' for MP3 files
-                else:
-                    st.error("Audio file not found or is a directory: " + audio_file_path)
+            audio_file = generate_audio(st.session_state.podcast_dialogue)
+            if audio_file and isinstance(audio_file, bytes):
+                # Use st.audio to play the audio bytes directly
+                st.audio(audio_file, format='audio/mp3')
             else:
-                st.error("No audio files generated or invalid path.")
+                st.error("No audio generated or invalid audio data.")
     else:
         st.write("No text available for summarization.")
 
