@@ -108,7 +108,7 @@ def main():
                 st.error("No audio generated or invalid audio data. Please check the logs for more details.")
     else:
         st.write("No text available for summarization.")
-    st.write("Created by Rohit Challa. [Open source on GitHub](https://github.com/CVSRohit/PodcastGen)")
+    st.write("Created by [Rohit Challa](https://www.linkedin.com/in/rohitchalla/). Open source on [GitHub](https://github.com/CVSRohit/PodcastGen)")
 
 if __name__ == "__main__":
     main()
