@@ -20,7 +20,7 @@ def generate_audio(dialogue):
         for index, entry in enumerate(dialogue["dialogue"]):
             role = entry["role"]
             text = entry["content"]
-            voice = "alloy" if role == "Host" else "nova"
+            voice = "alloy" if role == "Host" else "shimmer"
 
             # Call OpenAI's TTS API
             response = client.audio.speech.create(
