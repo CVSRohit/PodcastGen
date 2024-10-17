@@ -66,10 +66,10 @@ def summarize_text(text, audience, host_name, guest_name):
         for line in podcast_dialogue.splitlines():
             if line.startswith("**Host:**") or line.startswith("Host:") or line.startswith("**Host: ${host_name}**"):
                 structured_dialogue.final_dialogue["dialogue"].append({"role": "Host", "content": line[10:].strip()})
-                structured_dialogue.steps.append(Step(explanation=f"Host speaks: {line[10:].strip()}", output=line[10:].strip()))
+                structured_dialogue.steps.append(Step(explanation=f"Host speaks: {line[2:].strip()}", output=line[10:].strip()))
             elif line.startswith("**Guest:**") or line.startswith("Guest:") or line.startswith("**Guest: ${guest_name}**"):
                 structured_dialogue.final_dialogue["dialogue"].append({"role": "Guest", "content": line[11:].strip()})
-                structured_dialogue.steps.append(Step(explanation=f"Guest speaks: {line[11:].strip()}", output=line[11:].strip()))
+                structured_dialogue.steps.append(Step(explanation=f"Guest speaks: {line[3:].strip()}", output=line[11:].strip()))
 
         print("API Response:", podcast_dialogue)  # Log the API response
 
