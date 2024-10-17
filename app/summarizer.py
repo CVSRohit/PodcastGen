@@ -73,7 +73,16 @@ def summarize_text(text, audience, host_name, guest_name):
 
         print("API Response:", podcast_dialogue)  # Log the API response
 
-        return structured_dialogue  # Return structured dialogue as a dictionary
+        # Ensure podcast_dialogue is defined
+        if 'podcast_dialogue' not in locals():
+            podcast_dialogue = {"error": "No dialogue generated."}  # Default value if not generated
+
+        # Check if podcast_dialogue is valid before accessing its properties
+        if isinstance(podcast_dialogue, dict) and 'final_dialogue' in podcast_dialogue:
+            return structured_dialogue  # Return structured dialogue as a dictionary
+        else:
+            print("Invalid podcast_dialogue structure:", podcast_dialogue)
+            return {"error": "Invalid podcast dialogue structure."}
     except Exception as e:
         print(f"Error summarizing text: {e}")
         return {"error": "Error in summarization."}
