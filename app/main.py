@@ -31,19 +31,19 @@ def main():
     audience = st.text_input("Define the audience for the podcast (e.g, CEO of an AI company):")
 
     # Create a new row for host and guest names
-    # col3, col4 = st.columns(2)  # Create two new columns for host and guest names
+    col3, col4 = st.columns(2)  # Create two new columns for host and guest names
 
-    # with col3:
-    #     # Add input for host name
-    #     host_name = st.text_input("Enter the host's name:", value="John")
+    with col3:
+        # Add input for host name
+        host_name = st.text_input("Enter the host's name:", value="John")
 
-    # with col4:
-    #     # Add input for guest name
-    #     guest_name = st.text_input("Enter the guest's name:", value="Ash")
+    with col4:
+        # Add input for guest name
+        guest_name = st.text_input("Enter the guest's name:", value="Ash")
 
     # Define host and guest names
-    host_name = "John"  # Set host name
-    guest_name = "Ash"  # Set guest name
+    # host_name = "John"  # Set host name
+    # guest_name = "Ash"  # Set guest name
 
     if uploaded_file is not None:
         # Process the PDF
