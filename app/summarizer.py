@@ -32,6 +32,8 @@ def summarize_text(text, audience, host_name, guest_name):
         dict: A structured representation of the podcast dialogue.
     """
 
+    podcast_dialogue = None  # Initialize podcast_dialogue to None
+
     try:
         messages = [
             {"role": "user", "content": f"Please summarize in maximum 750 words the following text into a structured podcast dialogue between host {host_name} and guest {guest_name}. Example, 'Host: Hello and welcome to SummarizeToday' and ''. One dialogue per line. No formatting like bold, italic, or bullet points. The audience for this podcast is {audience}. Name of the podcast is SummarizeToday. Here are some grounding examples:\n\n"
@@ -74,7 +76,7 @@ def summarize_text(text, audience, host_name, guest_name):
         print("API Response:", podcast_dialogue)  # Log the API response
 
         # Ensure podcast_dialogue is defined
-        if 'podcast_dialogue' not in locals():
+        if podcast_dialogue is None:  # Check if podcast_dialogue is still None
             podcast_dialogue = {"error": "No dialogue generated."}  # Default value if not generated
 
         # Check if podcast_dialogue is valid before accessing its properties
