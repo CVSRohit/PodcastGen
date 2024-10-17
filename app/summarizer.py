@@ -34,7 +34,16 @@ def summarize_text(text, audience, host_name, guest_name):
 
     try:
         messages = [
-            {"role": "user", "content": f"Please summarize in maximum 750 words the following text into a structured podcast dialogue between host {host_name} and guest {guest_name}. Example, Host: Hello and welcome to SummarizeToday. One dialogue per line. No formatting like bold, italic, or bullet points. The audience for this podcast is {audience}. Name of the podcast is SummarizeToday:\n\n{text}"}
+            {"role": "user", "content": f"Please summarize in maximum 750 words the following text into a structured podcast dialogue between host {host_name} and guest {guest_name}. Example, 'Host: Hello and welcome to SummarizeToday' and ''. One dialogue per line. No formatting like bold, italic, or bullet points. The audience for this podcast is {audience}. Name of the podcast is SummarizeToday. Here are some grounding examples:\n\n"
+             "1. Host: Welcome to SummarizeToday! I'm your host, John, and today we have a special guest, Ash.\n"
+             "   Guest: Thanks for having me, John! I'm excited to be here.\n"
+             "2. Host: Hello everyone, this is John, and you're listening to SummarizeToday. Today, we have Ash with us.\n"
+             "   Guest: Hi John! It's great to be on the show.\n"
+             "3. Host: Welcome back to SummarizeToday! I'm John, your host, and today we have Ash joining us.\n"
+             "   Guest: Thanks, John! I'm thrilled to discuss this topic.\n"
+             "4. Host: Hi everyone, this is John from SummarizeToday. Today, we have Ash here to discuss an exciting topic.\n"
+             "   Guest: Thanks for having me, John! I'm looking forward to our conversation.\n\n"
+             f"Now, please summarize the following text:\n\n{text}"}
         ]
         response = client.chat.completions.create(
             model="gpt-4o-mini",
