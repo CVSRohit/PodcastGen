@@ -34,7 +34,7 @@ def summarize_text(text, audience, host_name, guest_name):
 
     try:
         messages = [
-            {"role": "user", "content": f"Please summarize in maximum 750 words the following text into a structured podcast dialogue between host {host_name} and guest {guest_name}. Do not repeat the host and guest names at start of each line. Dialogues should start with 'Host: ' or 'Guest: '. One dialogue per line. No formatting like bold, italic, or bullet points. The audience for this podcast is {audience}. Name of the podcast is SummarizeToday:\n\n{text}"}
+            {"role": "user", "content": f"Please summarize in maximum 750 words the following text into a structured podcast dialogue between host {host_name} and guest {guest_name}. Example, Host: Hello and welcome to SummarizeToday. One dialogue per line. No formatting like bold, italic, or bullet points. The audience for this podcast is {audience}. Name of the podcast is SummarizeToday:\n\n{text}"}
         ]
         response = client.chat.completions.create(
             model="gpt-4o-mini",
