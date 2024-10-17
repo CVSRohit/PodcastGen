@@ -49,7 +49,7 @@ def main():
         text = extract_text_from_url(url)
 
     if text:
-        st.write("Text Extraction status: Success")
+        st.markdown("<span style='color: green;'>Text Extraction status: Success</span>", unsafe_allow_html=True)
 
         # Generate the "Generate Dialogues" button only if text is available
         if st.button("Generate Dialogues"):
