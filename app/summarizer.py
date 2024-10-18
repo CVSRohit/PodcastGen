@@ -83,8 +83,7 @@ def summarize_text(text, audience, host_name, guest_name):
         if isinstance(podcast_dialogue, dict) and 'final_dialogue' in podcast_dialogue:
             return structured_dialogue  # Return structured dialogue as a dictionary
         else:
-            print("Invalid podcast_dialogue structure:", podcast_dialogue)
-            return {"error": "Invalid podcast dialogue structure."}
+            return structured_dialogue  # Return structured dialogue as a dictionary
     except Exception as e:
         print(f"Error summarizing text: {e}")
         return {"error": "Error in summarization."}
