@@ -70,7 +70,7 @@ def main():
             if not st.session_state.show_edit:
                 st.write("### Generated Dialogue:")
                 # Use updated dialogue if available
-                dialogue_to_display = st.session_state.get('updated_dialogue', st.session_state.podcast_dialogue["dialogue"])
+                dialogue_to_display = st.session_state.get('updated_dialogue', st.session_state.podcast_dialogue["final_dialogue"]["dialogue"])
                 for entry in dialogue_to_display:
                     st.write(f"**{entry['role']}:** {entry['content']}")
 
@@ -81,7 +81,7 @@ def main():
             # Show edit box and Save Changes button when Edit is clicked
             if st.session_state.get('show_edit', False):
                 # Combine all dialogues into one string
-                combined_dialogue = "\n".join([f"{entry['role']}: {entry['content']}" for entry in st.session_state.podcast_dialogue["dialogue"]])
+                combined_dialogue = "\n".join([f"{entry['role']}: {entry['content']}" for entry in st.session_state.podcast_dialogue["final_dialogue"]["dialogue"]])
                 
                 # Allow user to edit all dialogues in one text area
                 edited_text = st.text_area("Edit the entire dialogue:", value=combined_dialogue, height=300)
@@ -95,14 +95,14 @@ def main():
                             role, content = line.split(':', 1)
                             new_dialogue.append({"role": role.strip(), "content": content.strip()})
                     
-                    st.session_state.podcast_dialogue["dialogue"] = new_dialogue
+                    st.session_state.podcast_dialogue["final_dialogue"]["dialogue"] = new_dialogue
                     st.session_state.show_edit = False
                     st.success("Changes saved!")
                     st.session_state.updated_dialogue = new_dialogue  
 
         # Generate audio from podcast dialogue only if it exists
         if 'podcast_dialogue' in st.session_state and st.button("Generate Podcast"):
-            audio_file = generate_audio(st.session_state.podcast_dialogue)
+            audio_file = generate_audio(st.session_state.podcast_dialogue["final_dialogue"])
             if audio_file and isinstance(audio_file, str):  # Check if audio_file is a valid string
                 # Use st.audio to play the audio bytes directly
                 st.audio(audio_file, format='audio/mp3')
