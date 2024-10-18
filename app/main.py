@@ -58,12 +58,15 @@ def main():
         # Generate the "Generate Dialogues" button only if text is available
         if st.button("Generate Dialogues"):
             # Summarize the text into podcast dialogue, passing the audience, host, and guest names
-            podcast_dialogue = summarize_text(text, audience, host_name, guest_name)  # Pass host and guest names here
-            if "error" not in podcast_dialogue:  # Check for errors in summarization
-                st.session_state.podcast_dialogue = PodcastDialogue(**podcast_dialogue)  # Store the dialogue in session state
-                st.success("Dialogues generated successfully!")  # Notify user of success
+            podcast_dialogue = summarize_text(text, audience, host_name, guest_name)
+            if isinstance(podcast_dialogue, PodcastDialogue):  # Check if it's already a PodcastDialogue object
+                st.session_state.podcast_dialogue = podcast_dialogue
+                st.success("Dialogues generated successfully!")
+            elif isinstance(podcast_dialogue, dict) and "error" not in podcast_dialogue:
+                st.session_state.podcast_dialogue = PodcastDialogue(**podcast_dialogue)
+                st.success("Dialogues generated successfully!")
             else:
-                st.error(podcast_dialogue["error"])  # Display error message
+                st.error(podcast_dialogue.get("error", "An unknown error occurred"))
 
         # Display the dialogue in a text format
         if 'podcast_dialogue' in st.session_state:
