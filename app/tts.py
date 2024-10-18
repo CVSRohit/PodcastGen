@@ -11,11 +11,19 @@ load_dotenv()
 # Initialize OpenAI client
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-def generate_audio(dialogue):
+def generate_audio(dialogue, client, model):
     """
     Generates audio from the given structured dialogue using OpenAI's TTS model.
+
+    Args:
+        dialogue (dict): The structured dialogue to convert to audio.
+        client (OpenAI): The OpenAI client instance.
+        model (str): The TTS model to use.
+
+    Returns:
+        str: Path to the generated audio file, or None if an error occurred.
     """
-    audio_file_paths = []  # List to store paths of generated audio files
+    audio_file_paths = []
     try:
         for index, entry in enumerate(dialogue["dialogue"]):
             role = entry["role"]
@@ -24,7 +32,7 @@ def generate_audio(dialogue):
 
             # Call OpenAI's TTS API
             response = client.audio.speech.create(
-                model="tts-1",
+                model=model,
                 voice=voice,
                 input=text
             )
