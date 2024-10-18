@@ -70,7 +70,7 @@ def main():
             if not st.session_state.show_edit:
                 st.write("### Generated Dialogue:")
                 # Use updated dialogue if available
-                dialogue_to_display = st.session_state.get('updated_dialogue', podcast_dialogue.final_dialogue['dialogue'])  # Access the dialogue list
+                dialogue_to_display = st.session_state.get('updated_dialogue', st.session_state.podcast_dialogue["dialogue"])
                 for entry in dialogue_to_display:
                     st.write(f"**{entry['role']}:** {entry['content']}")
 
