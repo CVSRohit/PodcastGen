@@ -19,7 +19,8 @@ class PodcastDialogue(BaseModel):
     final_dialogue: dict
 
 def summarize_text(text, audience, host_name, guest_name, api_key):
-    client = OpenAI(api_key=api_key)
+    # Ensure the OpenAI client is initialized with the provided API key
+    client = OpenAI(api_key=api_key)  # This line is correct
     
     """
     Summarizes the given text using OpenAI's GPT model and formats it as a structured podcast dialogue.
