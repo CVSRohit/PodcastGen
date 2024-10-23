@@ -13,7 +13,8 @@ def main():
     # Display the title with the image next to it
     st.image("app/podcast.png", width=50)  # Adjust width as needed
     st.title("SummarizeToday: PDF/Link to Podcast")  # Replace with your actual title
-    
+    api_key = st.text_input("Enter your OpenAI API key:", type="password")
+    st.markdown("[Need help getting your OpenAI API key? Watch this video](https://www.youtube.com/watch?v=eRWZuijASuU&ab_channel=ThomasJanssen%7CTom%27sTechAcademy)")
     # Create two columns for file upload and URL input
     col1, col2 = st.columns(2)  # Create two columns
 
@@ -46,8 +47,7 @@ def main():
     # guest_name = "Ash"  # Set guest name
 
     # Add API key input
-    api_key = st.text_input("Enter your OpenAI API key:", type="password")
-    st.markdown("[Need help getting your OpenAI API key? Watch this video](https://www.youtube.com/watch?v=eRWZuijASuU&ab_channel=ThomasJanssen%7CTom%27sTechAcademy)")
+    
     if api_key:
         st.session_state.api_key = api_key
 
@@ -114,16 +114,19 @@ def main():
 
         # Generate audio from podcast dialogue only if it exists
         if 'podcast_dialogue' in st.session_state and st.button("Generate Podcast"):
-            audio_file = generate_audio(st.session_state.podcast_dialogue.final_dialogue)
-            if audio_file and isinstance(audio_file, str):  # Check if audio_file is a valid string
-                # Use st.audio to play the audio bytes directly
-                st.audio(audio_file, format='audio/mp3')
-                st.success("Audio generated successfully!")  # Notify user of success
-                st.write("Please note that this audio is AI-generated.")
-            elif isinstance(audio_file, dict) and "error" in audio_file:  # Check for error in audio generation
-                st.error(audio_file["error"])  # Display error message
+            if not st.session_state.get('api_key'):
+                st.error("Please enter your OpenAI API key.")
             else:
-                st.error("No audio generated or invalid audio data. Please check the logs for more details.")
+                audio_file = generate_audio(st.session_state.podcast_dialogue.final_dialogue, st.session_state.api_key)
+                if audio_file and isinstance(audio_file, str):  # Check if audio_file is a valid string
+                    # Use st.audio to play the audio bytes directly
+                    st.audio(audio_file, format='audio/mp3')
+                    st.success("Audio generated successfully!")  # Notify user of success
+                    st.write("Please note that this audio is AI-generated.")
+                elif isinstance(audio_file, dict) and "error" in audio_file:  # Check for error in audio generation
+                    st.error(audio_file["error"])  # Display error message
+                else:
+                    st.error("No audio generated or invalid audio data. Please check the logs for more details.")
     else:
         st.write("No text available for summarization.")
 
