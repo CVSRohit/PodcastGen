@@ -6,7 +6,7 @@ import streamlit as st  # Add this import to use Streamlit for input
 from pydantic import BaseModel  # Add this import for Pydantic models
 
 # Load environment variables from .env file
-load_dotenv()
+# load_dotenv()
 # client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Define the structured output classes

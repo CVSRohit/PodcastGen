@@ -6,7 +6,7 @@ from pydub import AudioSegment
 import streamlit as st
 
 # Load environment variables from .env file
-load_dotenv()
+# load_dotenv()
 
 def generate_audio(dialogue, api_key):
     """
