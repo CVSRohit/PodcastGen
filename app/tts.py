@@ -6,15 +6,13 @@ from pydub import AudioSegment
 import streamlit as st
 
 # Load environment variables from .env file
-load_dotenv()
+# load_dotenv()
 
-# Initialize OpenAI client
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-def generate_audio(dialogue):
+def generate_audio(dialogue, api_key):
     """
     Generates audio from the given structured dialogue using OpenAI's TTS model.
     """
+    client = OpenAI(api_key=api_key)
     audio_file_paths = []  # List to store paths of generated audio files
     try:
         for index, entry in enumerate(dialogue["dialogue"]):
