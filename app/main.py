@@ -18,8 +18,7 @@ def main():
     # Display the title with the image next to it
     st.image("app/podcast.png", width=50)  # Adjust width as needed
     st.title("SummarizeToday: PDF/Link to Podcast")  # Replace with your actual title
-    api_key = st.text_input("Enter your OpenAI API key (optional):", type="password")
-    st.markdown("[Need help getting your OpenAI API key? Watch this video](https://www.youtube.com/watch?v=eRWZuijASuU&ab_channel=ThomasJanssen%7CTom%27sTechAcademy)")
+    api_key = st.text_input("Enter your OpenAI API key (optional): [help](https://www.youtube.com/watch?v=eRWZuijASuU&ab_channel=ThomasJanssen%7CTom%27sTechAcademy)", type="password")
     # Create two columns for file upload and URL input
     col1, col2 = st.columns(2)  # Create two columns
 
