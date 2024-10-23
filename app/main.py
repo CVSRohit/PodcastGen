@@ -67,19 +67,16 @@ def main():
 
         # Generate the "Generate Dialogues" button only if text is available and API key is provided
         if st.button("Generate Dialogues"):
-            if not st.session_state.get('api_key'):
-                st.error("Please enter your OpenAI API key.")
+            # Pass the API key to the summarize_text function
+            podcast_dialogue = summarize_text(text, audience, host_name, guest_name, api_key)
+            if isinstance(podcast_dialogue, PodcastDialogue):  # Check if it's already a PodcastDialogue object
+                st.session_state.podcast_dialogue = podcast_dialogue
+                st.success("Dialogues generated successfully!")
+            elif isinstance(podcast_dialogue, dict) and "error" not in podcast_dialogue:
+                st.session_state.podcast_dialogue = PodcastDialogue(**podcast_dialogue)
+                st.success("Dialogues generated successfully!")
             else:
-                # Pass the API key to the summarize_text function
-                podcast_dialogue = summarize_text(text, audience, host_name, guest_name, api_key)
-                if isinstance(podcast_dialogue, PodcastDialogue):  # Check if it's already a PodcastDialogue object
-                    st.session_state.podcast_dialogue = podcast_dialogue
-                    st.success("Dialogues generated successfully!")
-                elif isinstance(podcast_dialogue, dict) and "error" not in podcast_dialogue:
-                    st.session_state.podcast_dialogue = PodcastDialogue(**podcast_dialogue)
-                    st.success("Dialogues generated successfully!")
-                else:
-                    st.error(podcast_dialogue.get("error", "An unknown error occurred"))
+                st.error(podcast_dialogue.get("error", "An unknown error occurred"))
 
         # Display the dialogue in a text format
         if 'podcast_dialogue' in st.session_state:
