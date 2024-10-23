@@ -6,8 +6,8 @@ import streamlit as st  # Add this import to use Streamlit for input
 from pydantic import BaseModel  # Add this import for Pydantic models
 
 # Load environment variables from .env file
-load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# load_dotenv()
+# client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Define the structured output classes
 class Step(BaseModel):
@@ -18,7 +18,9 @@ class PodcastDialogue(BaseModel):
     steps: list[Step]
     final_dialogue: dict
 
-def summarize_text(text, audience, host_name, guest_name):
+def summarize_text(text, audience, host_name, guest_name, api_key):
+    client = OpenAI(api_key=api_key)
+    
     """
     Summarizes the given text using OpenAI's GPT model and formats it as a structured podcast dialogue.
 
@@ -27,6 +29,7 @@ def summarize_text(text, audience, host_name, guest_name):
         audience (str): The audience definition for the podcast.
         host_name (str): The name of the host.
         guest_name (str): The name of the guest.
+        api_key (str): The OpenAI API key.
 
     Returns:
         dict: A structured representation of the podcast dialogue.
