@@ -10,10 +10,10 @@ st.set_page_config(page_title="SummarizeToday", page_icon="app/podcast.png")  # 
 
 def get_api_key():
     
-    api_key = st.session_state['api_key'] if 'api_key' in st.session_state else os.getenv("OPENAI_API_KEY")
-    if not api_key:
+    api_key_input = st.session_state['api_key'] if 'api_key' in st.session_state else os.getenv("OPENAI_API_KEY")
+    if not api_key_input:
         st.error("No API key provided. Please enter your OpenAI API key.")
-    return api_key
+    return api_key_input
 
 def main():
     # Initialize session state variables if they don't exist
@@ -24,6 +24,8 @@ def main():
     st.image("app/podcast.png", width=50)  # Adjust width as needed
     st.title("SummarizeToday: PDF/Link to Podcast")  # Replace with your actual title
     api_key = st.text_input("Enter your OpenAI API key (optional): [help](https://www.youtube.com/watch?v=eRWZuijASuU&ab_channel=ThomasJanssen%7CTom%27sTechAcademy)", type="password")
+    if api_key:
+        st.session_state.api_key = api_key
     # Create two columns for file upload and URL input
     col1, col2 = st.columns(2)  # Create two columns
 
@@ -50,15 +52,12 @@ def main():
     with col4:
         # Add input for guest name
         guest_name = st.text_input("Enter the guest's name:", value="Ash")
-
-    # Define host and guest names
-    # host_name = "John"  # Set host name
-    # guest_name = "Ash"  # Set guest name
-
-    # Add API key input
+    api_key_input = get_api_key()
+    if not api_key_input:
+        st.error("Please enter your OpenAI API key.")
+    st.write(api_key_input)
     
-    if api_key:
-        st.session_state.api_key = api_key
+
 
     if uploaded_file is not None:
         # Process the PDF
@@ -73,7 +72,7 @@ def main():
         # Generate the "Generate Dialogues" button only if text is available and API key is provided
         if st.button("Generate Dialogues"):
             # Pass the API key to the summarize_text function
-            podcast_dialogue = summarize_text(text, audience, host_name, guest_name, api_key)
+            podcast_dialogue = summarize_text(text, audience, host_name, guest_name, api_key_input)
             if isinstance(podcast_dialogue, PodcastDialogue):  # Check if it's already a PodcastDialogue object
                 st.session_state.podcast_dialogue = podcast_dialogue
                 st.success("Dialogues generated successfully!")
@@ -120,11 +119,7 @@ def main():
 
         # Generate audio from podcast dialogue only if it exists
         if 'podcast_dialogue' in st.session_state and st.button("Generate Podcast"):
-            api_key = get_api_key()
-            if not api_key:
-                st.error("Please enter your OpenAI API key.")
-            else:
-                audio_file = generate_audio(st.session_state.podcast_dialogue.final_dialogue, api_key)
+                audio_file = generate_audio(st.session_state.podcast_dialogue.final_dialogue, api_key_input)
                 if audio_file and isinstance(audio_file, str):  # Check if audio_file is a valid string
                     # Use st.audio to play the audio bytes directly
                     st.audio(audio_file, format='audio/mp3')
