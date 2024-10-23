@@ -10,7 +10,10 @@ st.set_page_config(page_title="SummarizeToday", page_icon="app/podcast.png")  # 
 
 def get_api_key():
     # Use the user-provided API key if available, otherwise use the environment variable
-    return st.session_state.get('api_key') or os.getenv("OPENAI_API_KEY")
+    api_key = st.session_state.get('api_key') or os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        st.error("No API key provided. Please enter your OpenAI API key.")
+    return api_key
 
 def main():
     # Initialize session state variables if they don't exist
