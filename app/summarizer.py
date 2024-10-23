@@ -6,7 +6,7 @@ import streamlit as st  # Add this import to use Streamlit for input
 from pydantic import BaseModel  # Add this import for Pydantic models
 
 # Load environment variables from .env file
-# load_dotenv()
+load_dotenv()
 # client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Define the structured output classes
@@ -88,5 +88,9 @@ def summarize_text(text, audience, host_name, guest_name, api_key):
         else:
             return structured_dialogue  # Return structured dialogue as a dictionary
     except Exception as e:
-        print(f"Error summarizing text: {e}")
+        print(f"Error summarizing text: {e}")  # Existing error logging
+        print("Text:", text)  # Log the text being summarized
+        print("Audience:", audience)  # Log the audience
+        print("Host Name:", host_name)  # Log the host name
+        print("Guest Name:", guest_name)  # Log the guest name
         return {"error": "Error in summarization."}

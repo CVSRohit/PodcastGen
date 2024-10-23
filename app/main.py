@@ -119,7 +119,7 @@ def main():
         if 'podcast_dialogue' in st.session_state and st.button("Generate Podcast"):
             api_key = get_api_key()
             if not api_key:
-                st.error("Please enter your OpenAI API key or set the OPENAI_API_KEY environment variable.")
+                st.error("Please enter your OpenAI API key.")
             else:
                 audio_file = generate_audio(st.session_state.podcast_dialogue.final_dialogue, api_key)
                 if audio_file and isinstance(audio_file, str):  # Check if audio_file is a valid string
