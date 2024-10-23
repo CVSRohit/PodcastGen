@@ -55,7 +55,6 @@ def main():
     api_key_input = get_api_key()
     if not api_key_input:
         st.error("Please enter your OpenAI API key.")
-    st.write(api_key_input)
     
 
 
@@ -71,16 +70,17 @@ def main():
 
         # Generate the "Generate Dialogues" button only if text is available and API key is provided
         if st.button("Generate Dialogues"):
-            # Pass the API key to the summarize_text function
-            podcast_dialogue = summarize_text(text, audience, host_name, guest_name, api_key_input)
-            if isinstance(podcast_dialogue, PodcastDialogue):  # Check if it's already a PodcastDialogue object
-                st.session_state.podcast_dialogue = podcast_dialogue
-                st.success("Dialogues generated successfully!")
-            elif isinstance(podcast_dialogue, dict) and "error" not in podcast_dialogue:
-                st.session_state.podcast_dialogue = PodcastDialogue(**podcast_dialogue)
-                st.success("Dialogues generated successfully!")
-            else:
-                st.error(podcast_dialogue.get("error", "An unknown error occurred"))
+            with st.spinner("Generating dialogues..."):  # Added spinner
+                # Pass the API key to the summarize_text function
+                podcast_dialogue = summarize_text(text, audience, host_name, guest_name, api_key_input)
+                if isinstance(podcast_dialogue, PodcastDialogue):  # Check if it's already a PodcastDialogue object
+                    st.session_state.podcast_dialogue = podcast_dialogue
+                    st.success("Dialogues generated successfully!")
+                elif isinstance(podcast_dialogue, dict) and "error" not in podcast_dialogue:
+                    st.session_state.podcast_dialogue = PodcastDialogue(**podcast_dialogue)
+                    st.success("Dialogues generated successfully!")
+                else:
+                    st.error(podcast_dialogue.get("error", "An unknown error occurred"))
 
         # Display the dialogue in a text format
         if 'podcast_dialogue' in st.session_state:
@@ -119,6 +119,7 @@ def main():
 
         # Generate audio from podcast dialogue only if it exists
         if 'podcast_dialogue' in st.session_state and st.button("Generate Podcast"):
+            with st.spinner("Generating audio..."):  # Added spinner
                 audio_file = generate_audio(st.session_state.podcast_dialogue.final_dialogue, api_key_input)
                 if audio_file and isinstance(audio_file, str):  # Check if audio_file is a valid string
                     # Use st.audio to play the audio bytes directly
