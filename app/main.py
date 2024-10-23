@@ -3,7 +3,9 @@ from utils import process_pdf, extract_text_from_url
 from summarizer import summarize_text, PodcastDialogue
 from tts import generate_audio
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 st.set_page_config(page_title="SummarizeToday", page_icon="app/podcast.png")  # Changed to use podcast image
 
 def get_api_key():
