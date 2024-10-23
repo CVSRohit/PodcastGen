@@ -134,14 +134,17 @@ def main():
                     st.error("No audio generated or invalid audio data. Please check the logs for more details.")
     else:
         st.write("No text available for summarization.")
-
-    # Add the Publish to Apple Podcast link at the bottom
-    col_space, col_link = st.columns([3, 1])
+    
+    st.write("Created by [Rohit Challa](https://www.linkedin.com/in/rohitchalla/). Open source on [GitHub](https://github.com/CVSRohit/PodcastGen)")
+    col_link = st.columns(1)[0]  # Keep only col_link
     with col_link:
+        # Center align the image and link using HTML
+        st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
         st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Podcasts_%28iOS%29.svg/50px-Podcasts_%28iOS%29.svg.png", width=40)
         st.write("[Publish to Apple Podcast](https://podcasters.apple.com/)")
+        st.markdown("</div>", unsafe_allow_html=True)
 
-    st.write("Created by [Rohit Challa](https://www.linkedin.com/in/rohitchalla/). Open source on [GitHub](https://github.com/CVSRohit/PodcastGen)")
+    
 
 if __name__ == "__main__":
     main()
