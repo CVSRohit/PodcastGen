@@ -135,12 +135,12 @@ def main():
     else:
         st.write("No text available for summarization.")
 
-    # Add the Publish to Apple Podcast link at the bottom with limited logo size
-    st.markdown(
-        "<a href='https://podcasters.apple.com/' target='_blank'><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Podcasts_%28iOS%29.svg/50px-Podcasts_%28iOS%29.svg.png' style='width: 40px;'/>  Publish to Apple Podcast</a>",
-        unsafe_allow_html=True
-    )
-    
+    # Add the Publish to Apple Podcast link at the bottom
+    col_space, col_link = st.columns([3, 1])
+    with col_link:
+        st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Podcasts_%28iOS%29.svg/50px-Podcasts_%28iOS%29.svg.png", width=40)
+        st.link_button("Publish to Apple Podcast", "https://podcasters.apple.com/", use_container_width=True)
+
     st.write("Created by [Rohit Challa](https://www.linkedin.com/in/rohitchalla/). Open source on [GitHub](https://github.com/CVSRohit/PodcastGen)")
 
 if __name__ == "__main__":
