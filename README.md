@@ -77,10 +77,6 @@ SummarizeToday is a web application that allows users to upload PDF files or ent
 
 Contributions are welcome! If you have suggestions for improvements or new features, feel free to open an issue or submit a pull request.
 
-## License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
 ## Acknowledgments
 
 - [OpenAI](https://openai.com/) for providing the GPT model and TTS capabilities.
